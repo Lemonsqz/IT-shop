@@ -32,20 +32,53 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
+
+        {% if request.user.is_authenticated %}
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'cart' %}">Корзина <span class="badge badge-pill badge-danger">{{ cart.products.count }}</span></a>
+            <a class="nav-link" href="{% url 'account_logout' %}" style="color: white; text-decoration: none;">
+              Выйти из системы
+            </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cart' %}">Корзина <span class="badge badge-pill badge-danger">{{ cart.products.count }}</span></a>
+
+          </li>
+
+
         </ul>
+        {% else %}
+        <ul class="navbar-nav ml-auto">
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_login' %}" style="color: white; text-decoration: none;">
+		           Войти
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_signup' %}" style="color: white; text-decoration: none;">
+               Регистрация
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cart' %}">Корзина <span class="badge badge-pill badge-danger">{{ cart.products.count }}</span></a>
+
+          </li>
+
+
+        </ul>
+        {% endif %}
+
+
       </div>
+
     </div>
   </nav>
 
   <!-- Page Content -->
   <div class="container">
 
-    <div class="row">
+    <div class="row mt-5">
 
       <div class="col-lg-3 mt-5">
         <div class="list-group">
@@ -101,7 +134,7 @@
   <!-- /.container -->
 
   <!-- Footer -->
-  <footer class="py-5 bg-dark">
+  <footer class="py-5 bg-dark mt-5">
     <div class="container">
       <p class="m-0 text-center text-white">© IT Shop site</p>
     </div>

@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-
+from  django.conf.urls import include
 from .views import (
     BaseView,
     ProductDetailView,
@@ -17,6 +17,7 @@ from .views import (
 
 urlpatterns = [
     path('', BaseView.as_view(), name='base'),
+    path('accounts/', include('allauth.urls')),
     path('products/<str:ct_model>/<str:slug>/', ProductDetailView.as_view(), name='product_detail'),
     path('category/<str:slug>/', CategoryDetailView.as_view(), name='category_detail'),
     path('cart/', CartView.as_view(), name='cart'),
